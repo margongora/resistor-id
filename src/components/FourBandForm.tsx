@@ -2,22 +2,33 @@ import { useForm } from '@tanstack/react-form';
 import { availableColors } from '../lib/types';
 import { useState } from 'react';
 
-const Form = () => {
+const FourBandForm = () => {
   const [resistance, setResistance] = useState<number | undefined>(undefined);
+  const [mult, setMult] = useState<string | null>('');
+  const [tolerance, setTolerance] = useState<number>(0);
 
   const form = useForm({
     defaultValues: {
       firstColor: 'Black',
       secondColor: 'Black',
       thirdColor: 'Black',
-      fourthColor: 'Black'
+      fourthColor: 'Gold'
     },
     onSubmit({ value }) {
       const resultColors = Array.from(Object.values(value)).map((colorName) => {
         return availableColors.filter((color) => color.name === colorName).at(0)!;
       });
 
-      setResistance((resultColors[0].digit! * 10 + resultColors[1].digit!) * resultColors[2].multiplier!);
+      const calcRes = (resultColors[0].digit! * 10 + resultColors[1].digit!) * resultColors[2].multiplier!;
+
+      if (calcRes >= 1000000000) setResistance(calcRes / 1000000000);
+      else if (calcRes >= 1000000) setResistance(calcRes / 1000000);
+      else if (calcRes >= 1000) setResistance(calcRes / 1000);
+      else setResistance(calcRes);
+
+      setMult((calcRes! >= 1000000000) ? 'G' : (calcRes! >= 1000000) ? 'M' : (calcRes! >= 1000) ? 'k' : null);
+
+      setTolerance(resultColors[3].tolerance!);
     }
   });
 
@@ -30,7 +41,7 @@ const Form = () => {
           form.handleSubmit();
         }}
       >
-        <div className='flex flex-row gap-x-4 justify-around p-2 text-black items-center text-center'>
+        <div className='flex flex-row flex-wrap gap-x-4 justify-around p-2 text-black items-center text-center'>
           <form.Field
             name='firstColor'
             children={(field) => (
@@ -127,7 +138,7 @@ const Form = () => {
                     return (
                       <option
                         className={`bg-${color.name.toLowerCase()} text-${color.name.toLowerCase()}`}
-                        selected={index === 0}
+                        selected={color.name === 'Gold'}
                         key={index}
                         value={color.name}
                       >{color.name}</option>
@@ -145,11 +156,11 @@ const Form = () => {
       </form>
       {resistance !== undefined && (
         <div >
-          {resistance}
+          {resistance.toString().slice(0, 3)}{mult}Ω {tolerance.toString()}%
         </div>
       )}
     </div>
   )
 }
 
-export default Form;
+export default FourBandForm;

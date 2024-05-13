@@ -52,19 +52,19 @@ export const availableColors: Color[] = [
     }, {
         digit: 7,
         name: 'Violet',
-        multiplier: null,
+        multiplier: 10000000,
         tolerance: 0.1,
         temp_coeff: 5
     }, {
         digit: 8,
         name: 'Gray',
-        multiplier: null,
+        multiplier: 100000000,
         tolerance: null,
         temp_coeff: 1
     }, {
         digit: 9,
         name: 'White',
-        multiplier: null,
+        multiplier: 1000000000,
         tolerance: null,
         temp_coeff: null
     }, {
