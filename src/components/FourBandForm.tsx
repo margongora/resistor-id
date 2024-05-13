@@ -1,11 +1,12 @@
 import { useForm } from '@tanstack/react-form';
-import { availableColors } from '../lib/types';
+import { availableColors, validResistors } from '../lib/constants';
 import { useState } from 'react';
 
 const FourBandForm = () => {
   const [resistance, setResistance] = useState<number | undefined>(undefined);
   const [mult, setMult] = useState<string | null>('');
   const [tolerance, setTolerance] = useState<number>(0);
+  const [isValid, setIsValid] = useState(true);
 
   const form = useForm({
     defaultValues: {
@@ -20,6 +21,10 @@ const FourBandForm = () => {
       });
 
       const calcRes = (resultColors[0].digit! * 10 + resultColors[1].digit!) * resultColors[2].multiplier!;
+
+      if (validResistors.filter((resistor) => calcRes.toString().includes(resistor.value)).length === 0) {
+        setIsValid(false);
+      } else setIsValid(true);
 
       if (calcRes >= 1000000000) setResistance(calcRes / 1000000000);
       else if (calcRes >= 1000000) setResistance(calcRes / 1000000);
@@ -151,8 +156,11 @@ const FourBandForm = () => {
         <button className='bg-red-600 m-2 p-2 rounded-lg hover:bg-red-700' type='submit' value='Submit'>Compute Resistor Info</button>
       </form>
       {resistance !== undefined && (
-        <div >
-          {resistance.toString()}{mult}Ω {tolerance.toString()}%
+        <div className='flex flex-col text-center'>
+          <p>{resistance.toString()}{mult}Ω {tolerance.toString()}%</p>
+          {!isValid && (
+            <p>This is not a standard resistor.</p>
+          )}
         </div>
       )}
     </>
