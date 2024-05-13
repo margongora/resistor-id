@@ -14,7 +14,7 @@ const ResistorFormTabs = () => {
         {forms.map((_, index) => {
           return (
             <li
-              className='m-2 basis-1/3 py-2 bg-stone-950 hover:bg-stone-500 rounded-2xl hover:cursor-pointer'
+              className='m-2 basis-1/3 py-2 rounded-2xl hover:cursor-pointer'
               key={index + 4}
               onClick={() => setActiveTab(index)}
               onMouseEnter={() => setHover(
