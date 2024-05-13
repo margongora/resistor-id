@@ -41,7 +41,7 @@ const FourBandForm = () => {
           form.handleSubmit();
         }}
       >
-        <div className='flex flex-row flex-wrap gap-x-4 justify-around p-2 text-black items-center text-center'>
+        <div className='flex flex-row flex-wrap gap-4 justify-around p-2 text-black items-center text-center'>
           <form.Field
             name='firstColor'
             children={(field) => (
