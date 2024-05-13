@@ -33,7 +33,7 @@ const FourBandForm = () => {
   });
 
   return (
-    <div className='border-4 border-white rounded-2xl align-middle m-4 p-4 flex flex-col text-center gap-4'>
+    <>
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -56,7 +56,6 @@ const FourBandForm = () => {
                   {availableColors.filter(value => value.digit !== null).map((color, index) => {
                     return (
                       <option
-                        selected={index === 0}
                         key={index}
                         value={color.name}
                       >{color.name}</option>
@@ -83,7 +82,6 @@ const FourBandForm = () => {
                   {availableColors.filter(value => value.digit !== null).map((color, index) => {
                     return (
                       <option
-                        selected={index === 0}
                         key={index}
                         value={color.name}
                       >{color.name}</option>
@@ -110,7 +108,6 @@ const FourBandForm = () => {
                   {availableColors.filter(value => value.multiplier !== null).map((color, index) => {
                     return (
                       <option
-                        selected={index === 0}
                         key={index}
                         value={color.name}
                       >{color.name}</option>
@@ -138,7 +135,6 @@ const FourBandForm = () => {
                     return (
                       <option
                         className={`bg-${color.name.toLowerCase()} text-${color.name.toLowerCase()}`}
-                        selected={color.name === 'Gold'}
                         key={index}
                         value={color.name}
                       >{color.name}</option>
@@ -156,10 +152,10 @@ const FourBandForm = () => {
       </form>
       {resistance !== undefined && (
         <div >
-          {resistance.toString().slice(0, 3)}{mult}Ω {tolerance.toString()}%
+          {resistance.toString()}{mult}Ω {tolerance.toString()}%
         </div>
       )}
-    </div>
+    </>
   )
 }
 
