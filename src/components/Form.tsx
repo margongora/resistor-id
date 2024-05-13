@@ -19,12 +19,10 @@ const Form = () => {
 
       setResistance((resultColors[0].digit! * 10 + resultColors[1].digit!) * resultColors[2].multiplier!);
     }
-
   });
 
   return (
-    <div className='border-4 border-white rounded-2xl align-middle m-4 p-4 flex flex-col gap-4'>
-
+    <div className='border-4 border-white rounded-2xl align-middle m-4 p-4 flex flex-col text-center gap-4'>
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -39,7 +37,7 @@ const Form = () => {
               <div className='flex flex-col gap-2'>
                 <label className='text-white' htmlFor={field.name}>First Band</label>
                 <select
-                  className='m-2 p-2 rounded-lg'
+                  className='m-2 p-2 rounded-lg hover:cursor-pointer'
                   name={field.name}
                   id={field.name}
                   value={field.state.value}
@@ -54,6 +52,9 @@ const Form = () => {
                     )
                   })}
                 </select>
+                <div className='rounded-lg border-black border-4 py-2' style={{
+                  backgroundColor: field.state.value.toLowerCase()
+                }} />
               </div>
             )}
           />
@@ -63,7 +64,7 @@ const Form = () => {
               <div className='flex flex-col gap-2'>
                 <label className='text-white' htmlFor={field.name}>Second Band</label>
                 <select
-                  className='m-2 p-2 rounded-lg'
+                  className='m-2 p-2 rounded-lg hover:cursor-pointer'
                   name={field.name}
                   id={field.name}
                   value={field.state.value}
@@ -78,6 +79,9 @@ const Form = () => {
                     )
                   })}
                 </select>
+                <div className='rounded-lg border-black border-4 py-2' style={{
+                  backgroundColor: field.state.value.toLowerCase()
+                }} />
               </div>
             )}
           />
@@ -87,7 +91,7 @@ const Form = () => {
               <div className='flex flex-col gap-2'>
                 <label className='text-white' htmlFor={field.name}>Third Band</label>
                 <select
-                  className='m-2 p-2 rounded-lg'
+                  className='m-2 p-2 rounded-lg hover:cursor-pointer'
                   name={field.name}
                   id={field.name}
                   value={field.state.value}
@@ -102,6 +106,9 @@ const Form = () => {
                     )
                   })}
                 </select>
+                <div className='rounded-lg border-black border-4 py-2' style={{
+                  backgroundColor: field.state.value.toLowerCase()
+                }} />
               </div>
             )}
           />
@@ -127,11 +134,14 @@ const Form = () => {
                     )
                   })}
                 </select>
+                <div className='rounded-lg border-black border-4 py-2' style={{
+                  backgroundColor: field.state.value.toLowerCase()
+                }} />
               </div>
             )}
           />
         </div>
-        <button className='bg-red-600' type='submit' value='Submit'>Test</button>
+        <button className='bg-red-600 m-2 p-2 rounded-lg hover:bg-red-700' type='submit' value='Submit'>Compute Resistor Info</button>
       </form>
       {resistance !== undefined && (
         <div >
